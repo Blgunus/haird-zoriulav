@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Хулан ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --pink-bg: #ffdde1; --card-white: #ffffff; --accent-pink: #ff4d6d; --text-gray: #4a4a4a; }
+        body { background-color: var(--pink-bg); font-family: 'Poppins', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { background: var(--card-white); width: 90%; max-width: 450px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        h1 { color: var(--accent-pink); font-family: 'Dancing Script', cursive; font-size: 2.5rem; }
+        .btn-group { margin-top: 25px; position: relative; height: 60px; }
+        button { padding: 12px 25px; font-size: 1rem; font-weight: 600; border-radius: 50px; border: none; cursor: pointer; }
+        #yesBtn { background-color: var(--accent-pink); color: white; margin-right: 10px; }
+        #noBtn { background-color: #ced4da; color: #495057; position: absolute; }
+        .gift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .gift-card { background: #fff0f3; padding: 15px; border-radius: 15px; cursor: pointer; transition: 0.3s; }
+        .gift-card:hover { transform: translateY(-5px); border: 2px solid var(--accent-pink); }
+        .full-width { grid-column: span 2; }
+        .hidden { display: none !important; }
+        #modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 30px; border-radius: 20px; width: 80%; max-width: 400px; position: relative; text-align: center; }
+        .close-btn { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 2rem; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="screen1">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYyYm94bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif" width="120">
+        <h1>Hi Хулан!</h1>
+        <p>Шижир has a question for you...<br><b>Will you be my Valentine?</b></p>
+        <div class="btn-group">
+            <button id="yesBtn" onclick="showGifts()">Yes!</button>
+            <button id="noBtn" onmouseover="moveNo()">No</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="screen2">
+        <h1>Yay! ❤️</h1>
+        <div class="gift-grid">
+            <div class="gift-card" onclick="openModal('letter')">📩<br>Letter</div>
+            <div class="gift-card" onclick="openModal('reasons')">✨<br>Reasons</div>
+            <div class="gift-card full-width" onclick="openModal('music')">🎵<br>Our Song</div>
+        </div>
+    </div>
+
+    <div id="modal" class="hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <div id="modal-text"></div>
+        </div>
+    </div>
+
+    <script>
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function showGifts() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            document.getElementById('screen1').classList.add('hidden');
+            document.getElementById('screen2').classList.remove('hidden');
+        }
+
+        function openModal(type) {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modal-text');
+            modal.classList.remove('hidden');
+
+            if(type === 'letter') {
+                content.innerHTML = `<h3>To Хулан,</h3><p>Buh zuild uuchlaarai mny buruu hairtaishu ❤️</p><p>Love, Шижир</p>`;
+            } else if(type === 'reasons') {
+                content.innerHTML = `<h3>Why I Love You</h3><ul style="text-align:left"><li>Mny az jargl</li><li>Mny buh zuil</li><li>The way you make every day better just by being you ✨</li></ul>`;
+            } else if(type === 'music') {
+                content.innerHTML = `<h3>Our Song</h3><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0FiLAomlBw6rZzgxrJ6Lxf?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
